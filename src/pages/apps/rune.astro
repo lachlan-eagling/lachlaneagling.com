@@ -94,6 +94,44 @@ const screenshots = [
                 </ul>
             </section>
 
+            <section class="roadmap">
+                <h2>Roadmap</h2>
+                <p class="roadmap-disclaimer">
+                    A living overview of the current product direction.
+                    Priorities may shift as the app evolves.
+                </p>
+                <div class="roadmap-list">
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker"></div>
+                        <div class="roadmap-content">
+                            Daily new articles summary
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker"></div>
+                        <div class="roadmap-content">
+                            New article notifications
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker"></div>
+                        <div class="roadmap-content">Reader mode</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker"></div>
+                        <div class="roadmap-content">Offline support</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker"></div>
+                        <div class="roadmap-content">iPad device support</div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-marker"></div>
+                        <div class="roadmap-content">MacOS support</div>
+                    </div>
+                </div>
+            </section>
+
             <section class="privacy">
                 <h2>Privacy Policy</h2>
                 <p>
@@ -310,5 +348,60 @@ const screenshots = [
         .app-tagline {
             margin-bottom: 1.5rem;
         }
+    }
+
+    /* Roadmap */
+    .roadmap-disclaimer {
+        font-size: 0.95rem !important;
+        font-style: italic;
+        margin-bottom: 2rem;
+        opacity: 0.7;
+        line-height: 1.5;
+    }
+
+    .roadmap-list {
+        margin-top: 1.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .roadmap-item {
+        position: relative;
+        padding-bottom: 1.5rem;
+        padding-left: 2rem;
+    }
+
+    .roadmap-item:last-child {
+        padding-bottom: 0;
+    }
+
+    /* Vertical Line */
+    .roadmap-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 18px;
+        bottom: -5px;
+        width: 2px;
+        background-color: var(--color-border);
+        opacity: 0.8;
+    }
+
+    .roadmap-marker {
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: var(--color-bg);
+        border: 2px solid var(--color-text);
+        z-index: 1;
+    }
+
+    .roadmap-content {
+        font-size: 1.05rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        transform: translateY(-2px);
     }
 </style>
