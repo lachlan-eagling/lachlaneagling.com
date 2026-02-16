@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import runeIcon from "../assets/images/apps/rune/icon.png";
 ---
 
 <Layout>
@@ -9,7 +11,15 @@ import Layout from "../layouts/Layout.astro";
     <div class="apps-grid">
         <!-- Rune App Card -->
         <a href="/apps/rune" class="app-card">
-            <div class="card-icon">R</div>
+            <div class="card-icon-wrapper">
+                <Image
+                    src={runeIcon}
+                    alt="Rune App Icon"
+                    class="card-icon-img"
+                    width={64}
+                    height={64}
+                />
+            </div>
             <div class="card-content">
                 <h2>Rune</h2>
                 <p>
@@ -64,24 +74,21 @@ import Layout from "../layouts/Layout.astro";
         opacity: 1; /* Override default link hover opacity */
     }
 
-    .card-icon {
+    .card-icon-wrapper {
         width: 64px;
         height: 64px;
-        background: black;
-        color: white;
-        border-radius: 16px;
+        border-radius: 16px; /* Match the icon border radius */
+        overflow: hidden; /* Ensure the image doesn't bleed out */
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.8rem;
-        font-family: var(--font-family-display);
+        background: transparent; /* Remove background since we have an icon now */
     }
 
-    @media (prefers-color-scheme: dark) {
-        .card-icon {
-            background: #ffffff;
-            color: #000000;
-        }
+    .card-icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .card-content h2 {
