@@ -4,5 +4,103 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
     <h1>Apps</h1>
-    <p>Coming soon...</p>
+    <p class="intro">A collection of tools and toys I've built.</p>
+
+    <div class="apps-grid">
+        <!-- Rune App Card -->
+        <a href="/apps/rune" class="app-card">
+            <div class="card-icon">R</div>
+            <div class="card-content">
+                <h2>Rune</h2>
+                <p>
+                    A privacy-focused RSS reader and read-it-later app. No
+                    distractions, just your content.
+                </p>
+                <span class="card-link">Learn more &rarr;</span>
+            </div>
+        </a>
+    </div>
 </Layout>
+
+<style>
+    .intro {
+        color: var(--color-text-muted);
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+    }
+
+    .apps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .app-card {
+        background-color: #ffffff;
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* Dark mode card override */
+    @media (prefers-color-scheme: dark) {
+        .app-card {
+            background-color: var(--color-bg);
+            /* Slightly lighter/different background for cards if needed, 
+               but using border is often cleaner in minimal designs */
+        }
+    }
+
+    .app-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border-color: var(--color-text-muted);
+        opacity: 1; /* Override default link hover opacity */
+    }
+
+    .card-icon {
+        width: 64px;
+        height: 64px;
+        background: black;
+        color: white;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        font-family: var(--font-family-display);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .card-icon {
+            background: #ffffff;
+            color: #000000;
+        }
+    }
+
+    .card-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-content p {
+        color: var(--color-text-muted);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 0 0 1.5rem 0;
+    }
+
+    .card-link {
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--color-text);
+        display: inline-flex;
+        align-items: center;
+    }
+</style>

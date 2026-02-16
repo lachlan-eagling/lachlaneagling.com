@@ -1,0 +1,71 @@
+---
+import Layout from "./Layout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<Layout>
+    <div class="markdown-content">
+        <h1>{frontmatter.title}</h1>
+        <p class="last-updated">Last updated: {frontmatter.date}</p>
+        <slot />
+    </div>
+</Layout>
+
+<style is:global>
+    .markdown-content {
+        max-width: 700px;
+        margin: 0 auto;
+        padding-bottom: 4rem;
+    }
+
+    .markdown-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .last-updated {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .markdown-content h2 {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        color: var(--color-text);
+    }
+
+    .markdown-content h3 {
+        margin-top: 1.5rem;
+        font-size: 1.2rem;
+        color: var(--color-text);
+    }
+
+    .markdown-content p {
+        margin-bottom: 1rem;
+        line-height: 1.7;
+        color: var(--color-text-muted);
+    }
+
+    .markdown-content ul {
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        color: var(--color-text-muted);
+    }
+
+    .markdown-content li {
+        margin-bottom: 0.5rem;
+    }
+
+    .markdown-content a {
+        color: var(--color-text);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    .markdown-content a:hover {
+        color: var(--color-text-muted);
+    }
+</style>
