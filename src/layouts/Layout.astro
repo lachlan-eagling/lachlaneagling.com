@@ -142,22 +142,38 @@ import { ClientRouter } from "astro:transitions";
 				pointer-events: none;
 				z-index: 0;
 				background-image: radial-gradient(
-					color-mix(in srgb, var(--color-text) 30%, transparent) 2px,
-					transparent 2px
+					color-mix(in srgb, var(--color-text) 12%, transparent) 1px,
+					transparent 1px
 				);
-				background-size: 32px 32px;
+				background-size: 44px 44px;
 
 				/* Interactive Spotlight Mask */
 				-webkit-mask-image: radial-gradient(
-					600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+					400px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
 					black 0%,
 					transparent 100%
 				);
 				mask-image: radial-gradient(
-					600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+					400px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
 					black 0%,
 					transparent 100%
 				);
+			}
+
+			@media (max-width: 48em) {
+				.background-grid {
+					background-size: 52px 52px;
+					-webkit-mask-image: radial-gradient(
+						200px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+						black 0%,
+						transparent 100%
+					);
+					mask-image: radial-gradient(
+						200px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+						black 0%,
+						transparent 100%
+					);
+				}
 			}
 
 			*,
