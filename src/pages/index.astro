@@ -1,10 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const posts = [];
+const posts: any[] = [];
 ---
 
 <Layout>
+	<section class="hero-section">
+		<h1 class="hero-title">
+			Hey, I'm <span class="text-gradient">Lachlan.</span>
+		</h1>
+		<p class="hero-subtitle">
+			Engineering leader / Polyglot dev / Dad x3<br />
+			Mostly caffeine, partially human. Sharing thoughts on tech and team craft.
+		</p>
+	</section>
+
+	<div class="section-divider">
+		<span class="divider-text">Writing</span>
+		<div class="divider-line"></div>
+	</div>
+
 	{
 		posts.length === 0 ? (
 			<div class="empty-state">
@@ -14,11 +29,12 @@ const posts = [];
 		) : (
 			<section class="posts-list">
 				{posts.map((post) => (
-					<article class="post-item">
-						<a href={post.slug}>
+					<article class="post-item group">
+						<a href={post.slug} class="post-link">
 							<span class="post-date">{post.date}</span>
 							<h2 class="post-title">{post.title}</h2>
 							<p class="post-description">{post.description}</p>
+							<div class="post-arrow">→</div>
 						</a>
 					</article>
 				))}
@@ -28,13 +44,65 @@ const posts = [];
 </Layout>
 
 <style>
+	.hero-section {
+		margin-bottom: 4rem;
+		padding-top: 2rem;
+	}
+
+	.hero-title {
+		font-family: var(--font-family-display);
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		margin-bottom: 1rem;
+		line-height: 1.1;
+	}
+
+	.text-gradient {
+		background: linear-gradient(
+			135deg,
+			var(--color-text) 0%,
+			var(--color-text-muted) 100%
+		);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.hero-subtitle {
+		font-family: var(--font-family-sans);
+		font-size: 1.15rem;
+		color: var(--color-text-muted);
+		max-width: 600px;
+		line-height: 1.6;
+	}
+
+	.section-divider {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.divider-text {
+		font-family: var(--font-family-mono);
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-text-muted);
+	}
+
+	.divider-line {
+		flex: 1;
+		height: 1px;
+		background: linear-gradient(to right, var(--color-border), transparent);
+	}
+
 	.empty-state {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding: 4rem 0;
-		text-align: center;
+		align-items: flex-start;
+		padding: 3rem 0;
 		color: var(--color-text-muted);
 	}
 
@@ -42,7 +110,7 @@ const posts = [];
 		font-family: var(--font-family-display);
 		font-size: 1.5rem;
 		font-weight: 500;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.25rem;
 		color: var(--color-text);
 	}
 
@@ -50,39 +118,51 @@ const posts = [];
 		font-family: var(--font-family-sans);
 		font-size: 1rem;
 		opacity: 0.8;
+		margin: 0;
 	}
 
 	.posts-list {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 2rem;
 	}
 
-	.post-item a {
+	.post-item {
+		position: relative;
+		transition: transform 0.2s ease;
+	}
+
+	.post-link {
 		display: block;
 		text-decoration: none;
 		color: inherit;
+		padding: 1.5rem;
+		border-radius: 16px;
+		border: 1px solid transparent;
+		transition: all 0.3s ease;
 	}
 
-	.post-item a:hover .post-title {
-		text-decoration: underline;
-		text-decoration-thickness: 1px;
-		text-underline-offset: 4px;
+	.post-link:hover {
+		background-color: var(--color-hover-bg);
+		border-color: var(--color-border);
+		transform: translateX(4px);
 	}
 
 	.post-date {
-		font-family: var(--font-family-sans);
+		font-family: var(--font-family-mono);
 		font-size: 0.85rem;
 		color: var(--color-text-muted);
 		display: block;
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.post-title {
 		font-family: var(--font-family-display);
 		font-size: 1.5rem;
 		margin-bottom: 0.5rem;
-		font-weight: 500;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		transition: color 0.2s ease;
 	}
 
 	.post-description {
@@ -91,5 +171,21 @@ const posts = [];
 		font-size: 1rem;
 		line-height: 1.6;
 		margin: 0;
+		max-width: 650px;
+	}
+
+	.post-arrow {
+		position: absolute;
+		right: 2rem;
+		top: 50%;
+		transform: translateY(-50%);
+		opacity: 0;
+		color: var(--color-text-muted);
+		transition: all 0.3s ease;
+	}
+
+	.post-link:hover .post-arrow {
+		opacity: 1;
+		transform: translate(8px, -50%);
 	}
 </style>

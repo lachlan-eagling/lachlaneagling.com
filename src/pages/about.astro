@@ -31,42 +31,53 @@ const socialLinks = [
     <div class="about-container">
         <div class="content-wrapper">
             <div class="avatar-section">
-                <div class="avatar-placeholder">
-                    <span class="avatar-initials">LE</span>
+                <div class="interactive-orb" aria-label="Animated Avatar">
+                    <div class="orb-core"></div>
+                    <div class="orb-ring ring-1"></div>
+                    <div class="orb-ring ring-2"></div>
+                    <div class="orb-ring ring-3"></div>
                 </div>
             </div>
 
             <div class="text-section">
+                <h1 class="page-title">
+                    About <span class="text-gradient">Me</span>
+                </h1>
+
                 <div class="bio-text">
                     <p>
                         I’m a software engineer and engineering manager with a
                         broad, polyglot background and a strong T-shaped
-                        approach to building and leading. I care about clear
-                        thinking, solid architecture, and helping teams ship
-                        meaningful work without creating unnecessary complexity.
+                        approach to building and leading. I care about <span
+                            class="highlight">clear thinking</span
+                        >, solid architecture, and helping teams ship meaningful
+                        work without creating unnecessary complexity.
                     </p>
                     <p>
-                        I’m especially interested in what an AI-first, agentic
-                        future means for engineering. I enjoy experimenting with
-                        AI in real workflows, shaping practical guardrails for
-                        teams, and exploring how our roles evolve as automation
-                        becomes part of everyday development. Outside of work,
-                        I’m an indie builder and tinkerer, constantly
-                        prototyping new ideas and learning.
+                        I’m especially interested in what an <span
+                            class="highlight">AI-first, agentic future</span
+                        > means for engineering. I enjoy experimenting with AI in
+                        real workflows, shaping practical guardrails for teams, and
+                        exploring how our roles evolve as automation becomes part
+                        of everyday development. Outside of work, I’m an indie builder
+                        and tinkerer, constantly prototyping new ideas and learning.
                     </p>
                 </div>
 
-                <div class="social-links">
-                    {
-                        socialLinks.map((link) => (
-                            <a
-                                href={link.url}
-                                aria-label={link.name}
-                                class="social-link"
-                                set:html={link.icon}
-                            />
-                        ))
-                    }
+                <div class="social-section">
+                    <h2 class="social-heading">Connect</h2>
+                    <div class="social-links">
+                        {
+                            socialLinks.map((link) => (
+                                <a
+                                    href={link.url}
+                                    aria-label={link.name}
+                                    class="social-link"
+                                    set:html={link.icon}
+                                />
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,25 +86,55 @@ const socialLinks = [
 
 <style>
     .about-container {
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
+        animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    .header-section {
-        margin-bottom: 3rem;
-        text-align: center;
+    @keyframes fade-in-up {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
-    h1 {
-        font-size: 2.5rem;
-        letter-spacing: -0.02em;
+    .page-title {
+        font-family: var(--font-family-display);
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin-bottom: 2rem;
+        line-height: 1.1;
+    }
+
+    .text-gradient {
+        background: linear-gradient(
+            135deg,
+            var(--color-text) 0%,
+            var(--color-text-muted) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .highlight {
+        color: var(--color-text);
         font-weight: 600;
+        text-decoration: underline;
+        text-decoration-color: var(--color-border);
+        text-underline-offset: 4px;
+        text-decoration-thickness: 1px;
     }
 
     .content-wrapper {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 3rem;
         align-items: center;
     }
 
@@ -101,45 +142,130 @@ const socialLinks = [
         .content-wrapper {
             flex-direction: row;
             align-items: flex-start;
-            gap: 3rem;
+            gap: 4rem;
         }
     }
 
     .avatar-section {
         flex-shrink: 0;
+        padding-top: 1rem;
     }
 
-    .avatar-placeholder {
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        background-color: var(--color-border);
+    /* Interactive Orb */
+    .interactive-orb {
+        width: 180px;
+        height: 180px;
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
+        cursor: crosshair;
     }
 
-    .avatar-initials {
-        font-family: var(--font-family-display);
-        font-size: 3rem;
-        font-weight: 500;
-        color: var(--color-text-muted);
-        opacity: 0.5;
+    .orb-core {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(
+            135deg,
+            var(--color-text),
+            var(--color-text-muted)
+        );
+        box-shadow: 0 0 30px
+            color-mix(in srgb, var(--color-text) 20%, transparent);
+        z-index: 10;
+        animation: pulse-core 4s ease-in-out infinite alternate;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .orb-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid var(--color-border);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .ring-1 {
+        width: 100px;
+        height: 100px;
+        border-width: 2px;
+        border-color: color-mix(in srgb, var(--color-text) 20%, transparent);
+        animation: rotate-ring 12s linear infinite;
+    }
+
+    .ring-2 {
+        width: 140px;
+        height: 140px;
+        border-style: dashed;
+        border-color: color-mix(in srgb, var(--color-text) 15%, transparent);
+        animation: rotate-ring 20s linear infinite reverse;
+    }
+
+    .ring-3 {
+        width: 180px;
+        height: 180px;
+        border-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+        animation: rotate-ring 30s linear infinite;
+    }
+
+    .interactive-orb:hover .ring-1 {
+        width: 120px;
+        height: 120px;
+        border-color: var(--color-text-muted);
+    }
+
+    .interactive-orb:hover .ring-2 {
+        width: 160px;
+        height: 160px;
+        border-color: var(--color-text-muted);
+    }
+
+    .interactive-orb:hover .ring-3 {
+        width: 200px;
+        height: 200px;
+        border-color: var(--color-text-muted);
+    }
+
+    .interactive-orb:hover .orb-core {
+        transform: scale(1.1);
+        background: var(--color-text);
+    }
+
+    @keyframes pulse-core {
+        0% {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+        100% {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+    }
+
+    @keyframes rotate-ring {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
     }
 
     .text-section {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 2rem;
     }
 
     .bio-text {
         font-family: var(--font-family-sans);
-        font-size: 1.1rem;
-        color: var(--color-text);
+        font-size: 1.15rem;
+        color: var(--color-text-muted);
         line-height: 1.7;
+        margin-bottom: 3rem;
     }
 
     .bio-text p {
@@ -148,6 +274,20 @@ const socialLinks = [
 
     .bio-text p:last-child {
         margin-bottom: 0;
+    }
+
+    .social-section {
+        border-top: 1px solid var(--color-border);
+        padding-top: 2rem;
+    }
+
+    .social-heading {
+        font-family: var(--font-family-mono);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-muted);
+        margin-bottom: 1.5rem;
     }
 
     .social-links {
@@ -160,24 +300,31 @@ const socialLinks = [
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         color: var(--color-text-muted);
-        background-color: transparent;
+        background-color: var(--color-bg);
         border: 1px solid var(--color-border);
-        transition: all 0.2s ease;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .social-link:hover {
         color: var(--color-bg);
         background-color: var(--color-text);
         border-color: var(--color-text);
-        transform: translateY(-2px);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .social-link:hover {
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.15);
+        }
     }
 
     :global(.social-link svg) {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
     }
 </style>

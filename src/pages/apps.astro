@@ -5,84 +5,163 @@ import runeIcon from "../assets/images/apps/rune/icon.png";
 ---
 
 <Layout>
-    <h1>Apps</h1>
-    <p class="intro">A collection of tools and toys I've built.</p>
+    <div class="page-header">
+        <h1 class="page-title">
+            Tools & <span class="text-gradient">Toys</span>
+        </h1>
+        <p class="intro">
+            A collection of things I've built to scratch my own itch.
+        </p>
+    </div>
 
     <div class="apps-grid">
         <!-- Rune App Card -->
         <a href="/apps/rune" class="app-card">
-            <div class="card-icon-wrapper">
-                <Image
-                    src={runeIcon}
-                    alt="Rune App Icon"
-                    class="card-icon-img"
-                    width={64}
-                    height={64}
-                />
-            </div>
-            <div class="card-content">
-                <h2>Rune</h2>
-                <p>
-                    A privacy-focused RSS reader and read-it-later app. No
-                    distractions, just your content.
-                </p>
-                <span class="card-link">Learn more &rarr;</span>
+            <div class="card-glow"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-icon-wrapper">
+                        <Image
+                            src={runeIcon}
+                            alt="Rune App Icon"
+                            class="card-icon-img"
+                            width={64}
+                            height={64}
+                        />
+                    </div>
+                    <div class="card-title-group">
+                        <h2>Rune</h2>
+                        <span class="badge">iOS</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>
+                        A privacy-focused RSS reader and read-it-later app. No
+                        distractions, just your content.
+                    </p>
+                    <span class="card-link"
+                        >Explore Rune <span class="arrow">→</span>
+                    </span>
+                </div>
             </div>
         </a>
     </div>
 </Layout>
 
 <style>
+    .page-header {
+        margin-bottom: 4rem;
+        padding-top: 1rem;
+    }
+
+    .page-title {
+        font-family: var(--font-family-display);
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+    }
+
+    .text-gradient {
+        background: linear-gradient(
+            135deg,
+            var(--color-text) 0%,
+            var(--color-text-muted) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
     .intro {
+        font-family: var(--font-family-sans);
         color: var(--color-text-muted);
-        margin-bottom: 3rem;
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        max-width: 600px;
+        line-height: 1.6;
     }
 
     .apps-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2.5rem;
     }
 
     .app-card {
-        background-color: #ffffff;
+        text-decoration: none;
+        color: inherit;
+        position: relative;
+        border-radius: 20px;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .card-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at 50% 0%,
+            color-mix(in srgb, var(--color-text) 15%, transparent),
+            transparent 70%
+        );
+        border-radius: 20px;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 0;
+        filter: blur(8px);
+    }
+
+    .card-inner {
+        position: relative;
+        background: color-mix(in srgb, var(--color-bg) 60%, transparent);
         border: 1px solid var(--color-border);
-        border-radius: 16px;
+        border-radius: 20px;
         padding: 2rem;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        text-decoration: none;
-        color: inherit;
-    }
-
-    /* Dark mode card override */
-    @media (prefers-color-scheme: dark) {
-        .app-card {
-            background-color: var(--color-bg);
-            /* Slightly lighter/different background for cards if needed, 
-               but using border is often cleaner in minimal designs */
-        }
+        z-index: 1;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: border-color 0.3s ease, background 0.3s ease;
     }
 
     .app-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        border-color: var(--color-text-muted);
-        opacity: 1; /* Override default link hover opacity */
+        transform: translateY(-4px) scale(1.02);
+    }
+
+    .app-card:hover .card-glow {
+        opacity: 1;
+    }
+
+    .app-card:hover .card-inner {
+        border-color: color-mix(
+            in srgb,
+            var(--color-text) 20%,
+            var(--color-border)
+        );
+        background: color-mix(in srgb, var(--color-bg) 80%, transparent);
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
     }
 
     .card-icon-wrapper {
         width: 64px;
         height: 64px;
-        border-radius: 16px; /* Match the icon border radius */
-        overflow: hidden; /* Ensure the image doesn't bleed out */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: transparent; /* Remove background since we have an icon now */
+        border-radius: 16px;
+        overflow: hidden;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .app-card:hover .card-icon-wrapper {
+        transform: scale(1.05) rotate(-3deg);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
 
     .card-icon-img {
@@ -91,23 +170,64 @@ import runeIcon from "../assets/images/apps/rune/icon.png";
         object-fit: cover;
     }
 
-    .card-content h2 {
+    .card-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: flex-start;
+    }
+
+    .card-title-group h2 {
+        font-family: var(--font-family-display);
         font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+    }
+
+    .badge {
+        font-family: var(--font-family-mono);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--color-border);
+        color: var(--color-text-muted);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+    }
+
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
     .card-content p {
+        font-family: var(--font-family-sans);
         color: var(--color-text-muted);
         font-size: 0.95rem;
-        line-height: 1.5;
-        margin: 0 0 1.5rem 0;
+        line-height: 1.6;
+        margin: 0;
     }
 
     .card-link {
+        font-family: var(--font-family-mono);
         font-weight: 500;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: var(--color-text);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
         display: inline-flex;
         align-items: center;
+        gap: 0.5rem;
+        margin-top: auto;
+    }
+
+    .arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .app-card:hover .arrow {
+        transform: translateX(4px);
     }
 </style>

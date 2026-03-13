@@ -1,5 +1,6 @@
 ---
 import PostHog from "../components/posthog.astro";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!DOCTYPE html>
@@ -16,49 +17,106 @@ import PostHog from "../components/posthog.astro";
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
 			rel="stylesheet"
 		/>
+		<script>
+			// Global mouse tracker so it persists across view transitions without duplicate listeners
+			if (
+				typeof window !== "undefined" &&
+				!(window as any).__mouseTrackerAdded
+			) {
+				(window as any).__mouseTrackerAdded = true;
+				window.addEventListener("mousemove", (e) => {
+					document.documentElement.style.setProperty(
+						"--mouse-x",
+						`${e.clientX}px`
+					);
+					document.documentElement.style.setProperty(
+						"--mouse-y",
+						`${e.clientY}px`
+					);
+				});
+			}
+
+			function setupInteractions() {
+				// Dock Active State
+				const currentPath = window.location.pathname;
+				const navLinks = document.querySelectorAll(".nav-link");
+				navLinks.forEach((link) => {
+					link.classList.remove("active");
+					const href = link.getAttribute("href");
+					if (href === "/" && currentPath === "/") {
+						link.classList.add("active");
+					} else if (href !== "/" && currentPath.startsWith(href)) {
+						link.classList.add("active");
+					}
+				});
+			}
+
+			// Run on initial load
+			document.addEventListener("DOMContentLoaded", setupInteractions);
+
+			// Re-run on Astro view transitions
+			document.addEventListener("astro:page-load", setupInteractions);
+		</script>
+		<ClientRouter />
 		<PostHog />
 		<slot name="head" />
 	</head>
 	<body>
+		<div class="background-grid"></div>
 		<div class="layout-container">
-			<header>
-				<div class="brand">
-					<a href="/">Lachlan Eagling</a>
-				</div>
-				<nav>
+			<main>
+				<slot />
+			</main>
+		</div>
+
+		<div class="dock-wrapper">
+			<header class="floating-dock">
+				<nav class="dock-nav">
+					<a href="/" class="brand-link" aria-label="Home">
+						<div class="brand-avatar">LE</div>
+					</a>
+					<div class="dock-divider"></div>
 					<a href="/" class="nav-link">Blog</a>
 					<a href="/about" class="nav-link">About</a>
 					<a href="/apps" class="nav-link">Apps</a>
 				</nav>
 			</header>
-			<main>
-				<slot />
-			</main>
 		</div>
+
 		<style is:global>
 			:root {
 				--font-family-sans: "Inter", sans-serif;
 				--font-family-display: "Outfit", sans-serif;
+				--font-family-mono: "JetBrains Mono", monospace;
 
 				/* Light Mode Colors */
-				--color-bg: #faf9f6; /* Bone white */
-				--color-text: #1a1a1a; /* Carbon / Dark Slate */
-				--color-text-muted: #555555;
-				--color-accent: #000000;
-				--color-border: #e0e0e0;
+				--color-bg: #f4f3ef; /* Softer neutral bone */
+				--color-text: #333333; /* Softer dark text */
+				--color-text-muted: #666666;
+				--color-accent: #111111;
+				--color-border: #dcd9d1; /* Slight warmth to the border */
+				--color-hover-bg: rgba(0, 0, 0, 0.04);
+				--color-dock-bg: rgba(
+					255,
+					255,
+					255,
+					0.85
+				); /* Whiter dock for contrast */
 			}
 
 			@media (prefers-color-scheme: dark) {
 				:root {
 					/* Dark Mode Colors */
-					--color-bg: #111111; /* Dark Carbon */
-					--color-text: #edece8; /* Off-white inverted */
+					--color-bg: #141414; /* Slightly lighter dark */
+					--color-text: #e6e5e1; /* Softer off-white */
 					--color-text-muted: #a0a0a0;
 					--color-accent: #ffffff;
 					--color-border: #333333;
+					--color-hover-bg: rgba(255, 255, 255, 0.1);
+					--color-dock-bg: rgba(30, 30, 30, 0.85);
 				}
 			}
 
@@ -74,6 +132,32 @@ import PostHog from "../components/posthog.astro";
 				padding: 0;
 				line-height: 1.6;
 				-webkit-font-smoothing: antialiased;
+				position: relative;
+			}
+
+			/* Background dot grid */
+			.background-grid {
+				position: fixed;
+				inset: 0;
+				pointer-events: none;
+				z-index: 0;
+				background-image: radial-gradient(
+					color-mix(in srgb, var(--color-text) 30%, transparent) 2px,
+					transparent 2px
+				);
+				background-size: 32px 32px;
+
+				/* Interactive Spotlight Mask */
+				-webkit-mask-image: radial-gradient(
+					600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+					black 0%,
+					transparent 100%
+				);
+				mask-image: radial-gradient(
+					600px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+					black 0%,
+					transparent 100%
+				);
 			}
 
 			*,
@@ -92,6 +176,7 @@ import PostHog from "../components/posthog.astro";
 				margin: 0 0 1rem 0;
 				font-weight: 600;
 				line-height: 1.2;
+				letter-spacing: -0.02em;
 			}
 
 			a {
@@ -100,67 +185,175 @@ import PostHog from "../components/posthog.astro";
 				transition: opacity 0.2s ease;
 			}
 
-			a:hover {
-				opacity: 0.7;
-			}
-
 			.layout-container {
+				position: relative;
+				z-index: 1;
 				max-width: 800px;
 				margin: 0 auto;
-				padding: 2rem 1.5rem;
+				padding: 4rem 1.5rem 8rem 1.5rem; /* bottom padding clears the dock */
 				display: flex;
 				flex-direction: column;
 				min-height: 100vh;
 			}
 
-			header {
-				text-align: center;
-				margin-bottom: 4rem;
-				padding-top: 2rem;
+			/* Gradient fade behind content to reduce grid distraction */
+			.layout-container::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 100vw;
+				height: 100%;
+				max-width: 1000px; /* Slightly wider than content */
+				background: radial-gradient(
+					ellipse at top,
+					var(--color-bg) 0%,
+					color-mix(in srgb, var(--color-bg) 80%, transparent) 40%,
+					transparent 100%
+				);
+				z-index: -1;
+				pointer-events: none;
 			}
-
-			.brand {
-				margin-bottom: 1.5rem;
-			}
-
-			.brand a {
-				font-family: var(--font-family-display);
-				font-size: 2rem;
-				font-weight: 600;
-				letter-spacing: -0.02em;
-				color: var(--color-text);
-			}
-
-			nav {
-				display: flex;
-				justify-content: center;
-				gap: 2rem;
-			}
-
-			.nav-link {
-				font-family: var(--font-family-sans);
-				font-size: 0.95rem;
-				font-weight: 500;
-				color: var(--color-text-muted);
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				position: relative;
-			}
-
-			.nav-link:hover {
-				color: var(--color-text);
-				opacity: 1;
-			}
-
-			/* Simple way to mark active link if needed, but for now CSS checks URL? 
-	   Actually Astro doesn't do this auto. We can add a script or pass a prop.
-	   For this MVP refactor step, we'll keep it simple/stateless. 
-	   We could verify current path in component script if requested.
-	*/
 
 			main {
 				flex: 1;
 				width: 100%;
+				animation: fade-in 0.6s ease-out forwards;
+			}
+
+			@keyframes fade-in {
+				from {
+					opacity: 0;
+					transform: translateY(10px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Floating Dock Styles */
+			.dock-wrapper {
+				position: fixed;
+				bottom: 2rem;
+				left: 0;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				z-index: 100;
+				pointer-events: none;
+			}
+
+			.floating-dock {
+				pointer-events: auto;
+				background: var(--color-dock-bg);
+				border: 1px solid
+					color-mix(in srgb, var(--color-border) 50%, transparent);
+				padding: 0.5rem 0.5rem;
+				border-radius: 100px;
+				box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
+					0 2px 8px rgba(0, 0, 0, 0.04);
+				backdrop-filter: blur(16px);
+				-webkit-backdrop-filter: blur(16px);
+				transition: transform 0.3s
+						cubic-bezier(0.175, 0.885, 0.32, 1.275),
+					box-shadow 0.3s ease;
+				animation: slide-up 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+					forwards;
+			}
+
+			@keyframes slide-up {
+				from {
+					opacity: 0;
+					transform: translateY(40px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@media (prefers-color-scheme: dark) {
+				.floating-dock {
+					box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+						0 2px 8px rgba(0, 0, 0, 0.2);
+					border: 1px solid
+						color-mix(in srgb, var(--color-border) 80%, transparent);
+				}
+			}
+
+			.dock-nav {
+				display: flex;
+				align-items: center;
+				gap: 0.25rem;
+			}
+
+			.brand-link {
+				padding: 0.25rem;
+				border-radius: 50%;
+				margin-right: 0.25rem;
+			}
+
+			.brand-avatar {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				background-color: var(--color-text);
+				color: var(--color-bg);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-family: var(--font-family-display);
+				font-weight: 600;
+				font-size: 0.8rem;
+				transition: transform 0.2s
+					cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			}
+
+			.brand-link:hover .brand-avatar {
+				transform: scale(1.1) rotate(-5deg);
+			}
+
+			.dock-divider {
+				width: 1px;
+				height: 20px;
+				background-color: var(--color-border);
+				margin: 0 0.25rem;
+			}
+
+			.nav-link {
+				font-family: var(--font-family-sans);
+				font-size: 0.9rem;
+				font-weight: 500;
+				color: var(--color-text-muted);
+				padding: 0.5rem 1rem;
+				border-radius: 100px;
+				transition: all 0.2s ease;
+				position: relative;
+			}
+
+			.nav-link:hover,
+			.nav-link.active {
+				color: var(--color-text);
+				background-color: var(--color-hover-bg);
+				opacity: 1;
+			}
+
+			.nav-link.active {
+				font-weight: 600;
+			}
+
+			.nav-link.active::after {
+				content: "";
+				position: absolute;
+				bottom: 0.2rem;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 4px;
+				height: 4px;
+				border-radius: 50%;
+				background-color: var(--color-text);
 			}
 		</style>
 	</body>

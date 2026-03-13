@@ -13,58 +13,57 @@ const screenshots = [
 
 <Layout>
     <div class="app-detail-container">
-        <div class="app-header">
-            <div class="app-icon-container">
-                <Image
-                    src={runeIcon}
-                    alt="Rune App Icon"
-                    class="app-icon"
-                    width={240}
-                    height={240}
-                />
-            </div>
-            <div class="app-title-section">
-                <h1 class="app-title">Rune</h1>
-                <span class="beta-badge">Public Beta</span>
-                <p class="app-tagline">
-                    Distraction-free RSS Reader & Read-it-Later
-                </p>
-                <a
-                    href="https://testflight.apple.com/join/8aN9vNmj"
-                    class="download-button"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    View in TestFlight
-                </a>
+        <!-- New Glassmorphic Header Card -->
+        <div class="app-hero-card">
+            <div class="hero-glow"></div>
+            <div class="hero-inner">
+                <div class="app-icon-container">
+                    <Image
+                        src={runeIcon}
+                        alt="Rune App Icon"
+                        class="app-icon"
+                        width={160}
+                        height={160}
+                    />
+                </div>
+                <div class="app-title-section">
+                    <h1 class="app-title">Rune</h1>
+                    <span class="beta-badge">Public Beta</span>
+                    <p class="app-tagline">
+                        Distraction-free RSS Reader & Read-it-Later
+                    </p>
+                    <a
+                        href="https://testflight.apple.com/join/8aN9vNmj"
+                        class="download-button"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View in TestFlight
+                    </a>
+                </div>
             </div>
         </div>
-
-        <!-- Temporarily disable screenshots
-        <div class="screenshots-container">
-            <div class="screenshot-placeholder">Screenshot 1</div>
-            <div class="screenshot-placeholder">Screenshot 2</div>
-            <div class="screenshot-placeholder">Screenshot 3</div>
-        </div>
-        -->
 
         <div class="content-section">
-            <section class="description">
+            <section class="description prose-section">
                 <h2>About Rune</h2>
-                <p>
-                    Rune is a privacy-focused RSS reader and read-it-later app
-                    that helps you save, organize, and enjoy articles without
-                    distractions.
-                </p>
-                <p>
-                    Privacy by design: All your data is stored locally on your
-                    device. No accounts, no tracking, no external servers.
-                </p>
+                <div class="prose-content">
+                    <p>
+                        Rune is a privacy-focused RSS reader and read-it-later
+                        app that helps you save, organize, and enjoy articles
+                        without distractions.
+                    </p>
+                    <p>
+                        Privacy by design: All your data is stored locally on
+                        your device. No accounts, no tracking, no external
+                        servers.
+                    </p>
+                </div>
             </section>
 
-            <section class="features">
+            <section class="features prose-section">
                 <h2>What you can do in this beta</h2>
-                <ul>
+                <ul class="styled-list">
                     <li>Save articles from any app using the share sheet</li>
                     <li>Subscribe to blogs and news sites via RSS feeds</li>
                     <li>
@@ -80,9 +79,9 @@ const screenshots = [
                 </ul>
             </section>
 
-            <section class="feedback">
+            <section class="feedback prose-section">
                 <h2>I'd love your feedback on</h2>
-                <ul>
+                <ul class="styled-list">
                     <li>Overall reading experience and reliability</li>
                     <li>Feed discovery and subscription flow</li>
                     <li>Article parsing quality across different websites</li>
@@ -94,7 +93,7 @@ const screenshots = [
                 </ul>
             </section>
 
-            <section class="roadmap">
+            <section class="roadmap prose-section">
                 <h2>Roadmap</h2>
                 <p class="roadmap-disclaimer">
                     A living overview of the current product direction.
@@ -132,17 +131,20 @@ const screenshots = [
                 </div>
             </section>
 
-            <section class="privacy">
+            <section class="privacy prose-section">
                 <h2>Privacy Policy</h2>
-                <p>
-                    Rune is designed with privacy at its core. I do not collect
-                    any personal data. All your feeds, articles, and reading
-                    history are stored locally on your device. I do not track
-                    your reading habits or share your data with third parties.
-                </p>
-                <a href="/apps/rune/privacy" class="privacy-link"
-                    >Read full Privacy Policy</a
-                >
+                <div class="prose-content">
+                    <p>
+                        Rune is designed with privacy at its core. I do not
+                        collect any personal data. All your feeds, articles, and
+                        reading history are stored locally on your device. I do
+                        not track your reading habits or share your data with
+                        third parties.
+                    </p>
+                    <a href="/apps/rune/privacy" class="privacy-link"
+                        >Read full Privacy Policy →</a
+                    >
+                </div>
             </section>
         </div>
     </div>
@@ -150,176 +152,9 @@ const screenshots = [
 
 <style>
     .app-detail-container {
-        max-width: 700px; /* Readability width */
+        max-width: 700px;
         margin: 0 auto;
-        animation: fadeIn 0.5s ease-out;
-    }
-
-    .app-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 2rem;
-        margin-bottom: 3rem;
-    }
-
-    /* Icon Styles */
-    .app-icon-container {
-        width: 120px;
-        height: 120px;
-        flex-shrink: 0;
-    }
-
-    .icon-placeholder {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #333333, #000000);
-        color: white;
-        border-radius: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        font-family: var(--font-family-display);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .app-icon {
-        width: 100%;
-        height: 100%;
-        border-radius: 24px;
-        object-fit: cover;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .app-title-section {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .app-title {
-        font-size: 3rem;
-        margin: 0;
-        line-height: 1;
-        letter-spacing: -0.03em;
-    }
-
-    .beta-badge {
-        display: inline-block;
-        background-color: rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 0.2rem 0.6rem;
-        border-radius: 50px;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-top: 0.5rem;
-        color: var(--color-text-muted);
-        font-weight: 500;
-    }
-
-    :global(.dark) .beta-badge {
-        background-color: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .app-tagline {
-        margin: 0.8rem 0 1.2rem;
-        font-size: 1.1rem;
-        color: var(--color-text-muted);
-    }
-
-    .download-button {
-        background-color: var(--color-accent);
-        color: var(--color-bg);
-        padding: 0.7rem 1.4rem;
-        border-radius: 50px;
-        font-weight: 600;
-        transition: all 0.2s ease;
-        font-size: 0.95rem;
-    }
-
-    .download-button:hover {
-        opacity: 0.9;
-        transform: translateY(-1px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Screenshots */
-    .screenshots-container {
-        display: flex;
-        gap: 1rem;
-        overflow-x: auto;
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
-        scrollbar-width: none; /* Firefox */
-    }
-
-    .screenshots-container::-webkit-scrollbar {
-        display: none; /* Chrome/Safari */
-    }
-
-    .screenshot-placeholder {
-        min-width: 260px;
-        height: 560px; /* ~ iPhone aspect ratio */
-        background-color: rgba(0, 0, 0, 0.03);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-text-muted);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .screenshot-placeholder {
-            background-color: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.05);
-        }
-    }
-
-    /* Content */
-    .content-section {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-    }
-
-    section h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        border-bottom: 1px solid var(--color-border);
-        padding-bottom: 0.5rem;
-    }
-
-    section p,
-    section ul li {
-        color: var(--color-text-muted);
-        font-size: 1.05rem;
-        line-height: 1.7;
-    }
-
-    section ul {
-        padding-left: 1.2rem;
-        margin: 0;
-    }
-
-    section ul li {
-        margin-bottom: 0.5rem;
-    }
-
-    .privacy-link {
-        display: inline-block;
-        margin-top: 1rem;
-        color: var(--color-text);
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        font-weight: 500;
-    }
-
-    .privacy-link:hover {
-        color: var(--color-text-muted);
+        animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes fadeIn {
@@ -333,41 +168,247 @@ const screenshots = [
         }
     }
 
-    @media (max-width: 600px) {
-        .app-header {
-            flex-direction: column;
-            text-align: center;
-            align-items: center;
-            gap: 1.5rem;
-        }
+    /* Hero Card */
+    .app-hero-card {
+        position: relative;
+        margin-bottom: 4rem;
+        margin-top: 1rem;
+        border-radius: 24px;
+    }
 
+    .hero-glow {
+        position: absolute;
+        inset: -20px;
+        background: radial-gradient(
+            circle at 50% 50%,
+            color-mix(in srgb, var(--color-text) 10%, transparent),
+            transparent 70%
+        );
+        opacity: 0.5;
+        z-index: 0;
+        filter: blur(20px);
+        border-radius: 24px;
+    }
+
+    .hero-inner {
+        position: relative;
+        background: color-mix(in srgb, var(--color-bg) 70%, transparent);
+        border: 1px solid var(--color-border);
+        border-radius: 24px;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        z-index: 1;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (min-width: 600px) {
+        .hero-inner {
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 4rem 3rem;
+            gap: 3rem;
+        }
+    }
+
+    .app-icon-container {
+        width: 140px;
+        height: 140px;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .app-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 32px;
+        object-fit: cover;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border: 1px solid
+            color-mix(in srgb, var(--color-border) 50%, transparent);
+    }
+
+    .app-title-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    @media (min-width: 600px) {
         .app-title-section {
-            align-items: center;
+            align-items: flex-start;
+            text-align: left;
         }
+    }
 
-        .app-tagline {
-            margin-bottom: 1.5rem;
-        }
+    .app-title {
+        font-family: var(--font-family-display);
+        font-size: clamp(3rem, 6vw, 4rem);
+        margin: 0;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+        background: linear-gradient(
+            135deg,
+            var(--color-text) 0%,
+            var(--color-text-muted) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .beta-badge {
+        font-family: var(--font-family-mono);
+        display: inline-block;
+        background: color-mix(in srgb, var(--color-text) 5%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 1rem;
+        color: var(--color-text-muted);
+        font-weight: 600;
+    }
+
+    .app-tagline {
+        font-family: var(--font-family-sans);
+        margin: 1.5rem 0 2rem;
+        font-size: 1.15rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        max-width: 400px;
+    }
+
+    .download-button {
+        font-family: var(--font-family-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background-color: var(--color-text);
+        color: var(--color-bg);
+        padding: 0.8rem 1.8rem;
+        border-radius: 100px;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-size: 0.85rem;
+        box-shadow: 0 4px 12px
+            color-mix(in srgb, var(--color-text) 20%, transparent);
+        text-decoration: none;
+    }
+
+    .download-button:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 24px
+            color-mix(in srgb, var(--color-text) 30%, transparent);
+        background-color: var(--color-text); /* Ensure it stays solid */
+        opacity: 0.9;
+    }
+
+    /* Content */
+    .content-section {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        padding-bottom: 2rem;
+    }
+
+    .prose-section h2 {
+        font-family: var(--font-family-display);
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .prose-section h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, var(--color-border), transparent);
+    }
+
+    .prose-content p {
+        font-family: var(--font-family-sans);
+        color: var(--color-text-muted);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .styled-list {
+        font-family: var(--font-family-sans);
+        color: var(--color-text-muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+        padding-left: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .styled-list li {
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .styled-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: color-mix(in srgb, var(--color-text) 30%, transparent);
+        font-family: var(--font-family-mono);
+    }
+
+    .privacy-link {
+        font-family: var(--font-family-mono);
+        display: inline-block;
+        margin-top: 1rem;
+        color: var(--color-text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .privacy-link:hover {
+        color: var(--color-text-muted);
+        transform: translateX(4px);
     }
 
     /* Roadmap */
     .roadmap-disclaimer {
-        font-size: 0.95rem !important;
+        font-family: var(--font-family-sans);
+        font-size: 0.95rem;
         font-style: italic;
         margin-bottom: 2rem;
+        color: var(--color-text-muted);
         opacity: 0.7;
-        line-height: 1.5;
+        line-height: 1.6;
+        border-left: 2px solid var(--color-border);
+        padding-left: 1rem;
     }
 
     .roadmap-list {
-        margin-top: 1.5rem;
+        margin-top: 2rem;
         padding-bottom: 1rem;
     }
 
     .roadmap-item {
         position: relative;
-        padding-bottom: 1.5rem;
-        padding-left: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 2.5rem;
     }
 
     .roadmap-item:last-child {
@@ -378,30 +419,41 @@ const screenshots = [
     .roadmap-item:not(:last-child)::after {
         content: "";
         position: absolute;
-        left: 5px;
-        top: 18px;
-        bottom: -5px;
+        left: 7px;
+        top: 24px;
+        bottom: -4px;
         width: 2px;
         background-color: var(--color-border);
-        opacity: 0.8;
     }
 
     .roadmap-marker {
         position: absolute;
         left: 0;
-        top: 5px;
-        width: 12px;
-        height: 12px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
         border-radius: 50%;
         background-color: var(--color-bg);
         border: 2px solid var(--color-text);
         z-index: 1;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .roadmap-item:hover .roadmap-marker {
+        transform: scale(1.2);
+        background-color: var(--color-text);
     }
 
     .roadmap-content {
-        font-size: 1.05rem;
-        color: var(--color-text-muted);
+        font-family: var(--font-family-sans);
+        font-size: 1.1rem;
+        color: var(--color-text);
         line-height: 1.5;
-        transform: translateY(-2px);
+        font-weight: 500;
+        transition: transform 0.2s ease;
+    }
+
+    .roadmap-item:hover .roadmap-content {
+        transform: translateX(4px);
     }
 </style>
