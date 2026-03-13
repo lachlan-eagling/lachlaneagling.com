@@ -27,15 +27,19 @@ import { ClientRouter } from "astro:transitions";
 				!(window as any).__mouseTrackerAdded
 			) {
 				(window as any).__mouseTrackerAdded = true;
+				let rafId: number;
 				window.addEventListener("mousemove", (e) => {
-					document.documentElement.style.setProperty(
-						"--mouse-x",
-						`${e.clientX}px`
-					);
-					document.documentElement.style.setProperty(
-						"--mouse-y",
-						`${e.clientY}px`
-					);
+					cancelAnimationFrame(rafId);
+					rafId = requestAnimationFrame(() => {
+						document.documentElement.style.setProperty(
+							"--mouse-x",
+							`${e.clientX}px`
+						);
+						document.documentElement.style.setProperty(
+							"--mouse-y",
+							`${e.clientY}px`
+						);
+					});
 				});
 			}
 
@@ -279,6 +283,15 @@ import { ClientRouter } from "astro:transitions";
 					forwards;
 			}
 
+			/* backdrop-filter: blur is expensive on mobile GPUs — replace with solid background */
+			@media (hover: none) {
+				.floating-dock {
+					backdrop-filter: none;
+					-webkit-backdrop-filter: none;
+					background: var(--color-bg);
+				}
+			}
+
 			@keyframes slide-up {
 				from {
 					opacity: 0;
@@ -345,7 +358,7 @@ import { ClientRouter } from "astro:transitions";
 				color: var(--color-text-muted);
 				padding: 0.5rem 1rem;
 				border-radius: 100px;
-				transition: all 0.2s ease;
+				transition: color 0.2s ease, background-color 0.2s ease;
 				position: relative;
 			}
 
