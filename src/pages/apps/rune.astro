@@ -13,7 +13,7 @@ const screenshots = [
 
 <Layout
     title="Rune"
-    description="Distraction-free RSS reader & read-it-later app for iOS. Privacy-focused, local-first, with AI-powered summaries. Now in Public Beta."
+    description="Distraction-free RSS reader & read-it-later app for iOS. Privacy-focused, local-first, with AI-powered summaries. Available now on the App Store."
     ogImage={runeIcon.src}
 >
     <div class="app-detail-container">
@@ -32,17 +32,16 @@ const screenshots = [
                 </div>
                 <div class="app-title-section">
                     <h1 class="app-title">Rune</h1>
-                    <span class="beta-badge">Public Beta</span>
                     <p class="app-tagline">
                         Distraction-free RSS Reader & Read-it-Later
                     </p>
                     <a
-                        href="https://testflight.apple.com/join/8aN9vNmj"
+                        href="https://apps.apple.com/us/app/rune/id6758538726"
                         class="download-button"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        View in TestFlight
+                        Download on the App Store
                     </a>
                 </div>
             </div>
@@ -66,7 +65,7 @@ const screenshots = [
             </section>
 
             <section class="features prose-section">
-                <h2>What you can do in this beta</h2>
+                <h2>Features</h2>
                 <ul class="styled-list">
                     <li>Save articles from any app using the share sheet</li>
                     <li>Subscribe to blogs and news sites via RSS feeds</li>
@@ -80,20 +79,6 @@ const screenshots = [
                     </li>
                     <li>Search across all your saved content</li>
                     <li>Import your existing reading list from other apps</li>
-                </ul>
-            </section>
-
-            <section class="feedback prose-section">
-                <h2>I'd love your feedback on</h2>
-                <ul class="styled-list">
-                    <li>Overall reading experience and reliability</li>
-                    <li>Feed discovery and subscription flow</li>
-                    <li>Article parsing quality across different websites</li>
-                    <li>
-                        Performance and battery impact during background feed
-                        refresh
-                    </li>
-                    <li>Any crashes or unexpected behaviour</li>
                 </ul>
             </section>
 
@@ -279,21 +264,6 @@ const screenshots = [
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-    }
-
-    .beta-badge {
-        font-family: var(--font-family-mono);
-        display: inline-block;
-        background: color-mix(in srgb, var(--color-text) 5%, transparent);
-        border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
-        padding: 0.25rem 0.75rem;
-        border-radius: 100px;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-top: 1rem;
-        color: var(--color-text-muted);
-        font-weight: 600;
     }
 
     .app-tagline {
