@@ -1,12 +1,16 @@
 ---
 import Layout from "./Layout.astro";
 const { frontmatter } = Astro.props;
+const formattedDate =
+    frontmatter.date instanceof Date
+        ? frontmatter.date.toISOString().slice(0, 10)
+        : frontmatter.date;
 ---
 
 <Layout>
     <div class="markdown-content">
         <h1>{frontmatter.title}</h1>
-        <p class="last-updated">Last updated: {frontmatter.date}</p>
+        <p class="last-updated">Last updated: {formattedDate}</p>
         <slot />
     </div>
 </Layout>

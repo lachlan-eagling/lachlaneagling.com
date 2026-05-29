@@ -1,0 +1,364 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
+---
+
+<Layout>
+    <div class="app-detail-container">
+        <div class="app-hero-card">
+            <div class="hero-glow"></div>
+            <div class="hero-inner">
+                <div class="app-icon-container">
+                    <Image
+                        src={stacksIcon}
+                        alt="Stacks App Icon"
+                        class="app-icon"
+                        width={160}
+                        height={160}
+                    />
+                </div>
+                <div class="app-title-section">
+                    <h1 class="app-title">Stacks</h1>
+                    <span class="beta-badge">Public Beta</span>
+                    <p class="app-tagline">
+                        Private reading tracker & library
+                    </p>
+                    <a
+                        href="about:blank"
+                        class="download-button"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View in TestFlight
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <section class="description prose-section">
+                <h2>About Stacks</h2>
+                <div class="prose-content">
+                    <p>
+                        Stacks is a private reading tracker for building a
+                        library, logging every reading session, and watching
+                        your habit grow over time.
+                    </p>
+                    <p>
+                        No account, no social feed, no ads. Your books,
+                        reading sessions, notes, and covers stay on your device
+                        and can sync through your personal iCloud account.
+                    </p>
+                </div>
+            </section>
+
+            <section class="features prose-section">
+                <h2>What you can do in this beta</h2>
+                <ul class="styled-list">
+                    <li>
+                        Add books by searching title or author, entering an
+                        ISBN, scanning a barcode, or adding details manually
+                    </li>
+                    <li>
+                        Organise your library by reading status, author,
+                        publisher, rating, and progress
+                    </li>
+                    <li>
+                        Log pages read, reading time, dates, and private notes
+                        for each session
+                    </li>
+                    <li>
+                        Track annual reading goals, daily page goals, current
+                        streaks, weekly activity, pages read, and reading time
+                    </li>
+                    <li>
+                        Unlock achievements for streaks, pages, finished books,
+                        notes, ratings, and comeback moments
+                    </li>
+                    <li>
+                        Export your library as CSV or delete all app data from
+                        settings
+                    </li>
+                </ul>
+            </section>
+
+            <section class="feedback prose-section">
+                <h2>I'd love your feedback on</h2>
+                <ul class="styled-list">
+                    <li>Book lookup quality across ISBN, title, and author</li>
+                    <li>Barcode scanning reliability and camera flow</li>
+                    <li>Reading session logging speed and clarity</li>
+                    <li>Stats, streaks, goals, and achievement motivation</li>
+                    <li>iCloud sync behaviour across devices</li>
+                    <li>Any crashes or unexpected behaviour</li>
+                </ul>
+            </section>
+
+            <section class="privacy prose-section">
+                <h2>Privacy Policy</h2>
+                <div class="prose-content">
+                    <p>
+                        Stacks is designed to keep your reading history private.
+                        I do not have servers that store your library. Book
+                        lookup uses the Google Books API when you search or scan
+                        for a book, and anonymous diagnostics help improve the
+                        beta.
+                    </p>
+                    <a href="/apps/stacks/privacy" class="action-link"
+                        >Read full Privacy Policy -></a
+                    >
+                </div>
+            </section>
+
+            <section class="contact prose-section">
+                <h2>Contact</h2>
+                <div class="prose-content">
+                    <p>
+                        For support, feedback, or any other inquiries related to
+                        Stacks, please reach out via email.
+                    </p>
+                    <a
+                        href="mailto:hello@lachlaneagling.com"
+                        class="action-link">hello@lachlaneagling.com -></a
+                    >
+                </div>
+            </section>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .app-detail-container {
+        max-width: 700px;
+        margin: 0 auto;
+        animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .app-hero-card {
+        position: relative;
+        margin-bottom: 4rem;
+        margin-top: 1rem;
+        border-radius: 24px;
+    }
+
+    .hero-glow {
+        position: absolute;
+        inset: -20px;
+        background: radial-gradient(
+            circle at 50% 50%,
+            color-mix(in srgb, var(--color-text) 10%, transparent),
+            transparent 70%
+        );
+        opacity: 0.5;
+        z-index: 0;
+        filter: blur(20px);
+        border-radius: 24px;
+    }
+
+    .hero-inner {
+        position: relative;
+        background: color-mix(in srgb, var(--color-bg) 70%, transparent);
+        border: 1px solid var(--color-border);
+        border-radius: 24px;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        z-index: 1;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (min-width: 600px) {
+        .hero-inner {
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 4rem 3rem;
+            gap: 3rem;
+        }
+    }
+
+    .app-icon-container {
+        width: 140px;
+        height: 140px;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .app-icon {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.2));
+    }
+
+    .app-title-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    @media (min-width: 600px) {
+        .app-title-section {
+            align-items: flex-start;
+            text-align: left;
+        }
+    }
+
+    .app-title {
+        font-family: var(--font-family-display);
+        font-size: clamp(3rem, 6vw, 4rem);
+        margin: 0;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+        background: linear-gradient(
+            135deg,
+            var(--color-text) 0%,
+            var(--color-text-muted) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .beta-badge {
+        font-family: var(--font-family-mono);
+        display: inline-block;
+        background: color-mix(in srgb, var(--color-text) 5%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 1rem;
+        color: var(--color-text-muted);
+        font-weight: 600;
+    }
+
+    .app-tagline {
+        font-family: var(--font-family-sans);
+        margin: 1.5rem 0 2rem;
+        font-size: 1.15rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        max-width: 400px;
+    }
+
+    .download-button {
+        font-family: var(--font-family-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background-color: var(--color-text);
+        color: var(--color-bg);
+        padding: 0.8rem 1.8rem;
+        border-radius: 100px;
+        font-weight: 600;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-size: 0.85rem;
+        box-shadow: 0 4px 12px
+            color-mix(in srgb, var(--color-text) 20%, transparent);
+        text-decoration: none;
+    }
+
+    .download-button:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 24px
+            color-mix(in srgb, var(--color-text) 30%, transparent);
+        background-color: var(--color-text);
+        opacity: 0.9;
+    }
+
+    .content-section {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        padding-bottom: 2rem;
+    }
+
+    .prose-section h2 {
+        font-family: var(--font-family-display);
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .prose-section h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, var(--color-border), transparent);
+    }
+
+    .prose-content p {
+        font-family: var(--font-family-sans);
+        color: var(--color-text-muted);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .styled-list {
+        font-family: var(--font-family-sans);
+        color: var(--color-text-muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+        padding-left: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .styled-list li {
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .styled-list li::before {
+        content: "->";
+        position: absolute;
+        left: 0;
+        color: color-mix(in srgb, var(--color-text) 30%, transparent);
+        font-family: var(--font-family-mono);
+    }
+
+    .action-link {
+        font-family: var(--font-family-mono);
+        display: inline-block;
+        margin-top: 1rem;
+        color: var(--color-text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .action-link:hover {
+        color: var(--color-text-muted);
+        transform: translateX(4px);
+    }
+
+</style>
