@@ -2,7 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 
 import { Image } from "astro:assets";
-import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
+import deweyIcon from "../../assets/images/apps/stacks/icon.svg";
 ---
 
 <Layout>
@@ -12,15 +12,15 @@ import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
             <div class="hero-inner">
                 <div class="app-icon-container">
                     <Image
-                        src={stacksIcon}
-                        alt="Stacks App Icon"
+                        src={deweyIcon}
+                        alt="Dewey App Icon"
                         class="app-icon"
                         width={160}
                         height={160}
                     />
                 </div>
                 <div class="app-title-section">
-                    <h1 class="app-title">Stacks</h1>
+                    <h1 class="app-title">Dewey</h1>
                     <span class="beta-badge">Public Beta</span>
                     <p class="app-tagline">
                         Private reading tracker & library
@@ -39,10 +39,10 @@ import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
 
         <div class="content-section">
             <section class="description prose-section">
-                <h2>About Stacks</h2>
+                <h2>About Dewey</h2>
                 <div class="prose-content">
                     <p>
-                        Stacks is a private reading tracker for building a
+                        Dewey is a private reading tracker for building a
                         library, logging every reading session, and watching
                         your habit grow over time.
                     </p>
@@ -100,13 +100,13 @@ import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
                 <h2>Privacy Policy</h2>
                 <div class="prose-content">
                     <p>
-                        Stacks is designed to keep your reading history private.
+                        Dewey is designed to keep your reading history private.
                         I do not have servers that store your library. Book
                         lookup uses the Google Books API when you search or scan
                         for a book, and anonymous diagnostics help improve the
                         beta.
                     </p>
-                    <a href="/apps/stacks/privacy" class="action-link"
+                    <a href="/apps/dewey/privacy" class="action-link"
                         >Read full Privacy Policy -></a
                     >
                 </div>
@@ -117,7 +117,7 @@ import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
                 <div class="prose-content">
                     <p>
                         For support, feedback, or any other inquiries related to
-                        Stacks, please reach out via email.
+                        Dewey, please reach out via email.
                     </p>
                     <a
                         href="mailto:hello@lachlaneagling.com"
@@ -223,11 +223,11 @@ import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
 
     .app-title {
         font-family: var(--font-family-display);
-        font-size: clamp(3rem, 6vw, 4rem);
-        margin: 0;
-        line-height: 1;
-        letter-spacing: -0.04em;
+        font-size: clamp(2.5rem, 6vw, 3.75rem);
         font-weight: 700;
+        margin: 0;
+        letter-spacing: -0.04em;
+        line-height: 0.95;
         background: linear-gradient(
             135deg,
             var(--color-text) 0%,
@@ -240,125 +240,113 @@ import stacksIcon from "../../assets/images/apps/stacks/icon.svg";
 
     .beta-badge {
         font-family: var(--font-family-mono);
-        display: inline-block;
-        background: color-mix(in srgb, var(--color-text) 5%, transparent);
-        border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
-        padding: 0.25rem 0.75rem;
-        border-radius: 100px;
         font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-top: 1rem;
-        color: var(--color-text-muted);
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-text-muted);
+        background: color-mix(in srgb, var(--color-border) 80%, transparent);
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        margin-top: 0.75rem;
     }
 
     .app-tagline {
         font-family: var(--font-family-sans);
-        margin: 1.5rem 0 2rem;
-        font-size: 1.15rem;
+        font-size: 1.125rem;
         color: var(--color-text-muted);
+        margin: 1rem 0 2rem;
         line-height: 1.5;
-        max-width: 400px;
     }
 
     .download-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         font-family: var(--font-family-mono);
+        font-size: 0.85rem;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        background-color: var(--color-text);
-        color: var(--color-bg);
-        padding: 0.8rem 1.8rem;
-        border-radius: 100px;
-        font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        font-size: 0.85rem;
-        box-shadow: 0 4px 12px
-            color-mix(in srgb, var(--color-text) 20%, transparent);
         text-decoration: none;
+        color: var(--color-bg);
+        background: var(--color-text);
+        padding: 0.9rem 1.3rem;
+        border-radius: 999px;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     }
 
     .download-button:hover {
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 8px 24px
-            color-mix(in srgb, var(--color-text) 30%, transparent);
-        background-color: var(--color-text);
-        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+        background: color-mix(in srgb, var(--color-text) 92%, white);
     }
 
     .content-section {
-        display: flex;
-        flex-direction: column;
-        gap: 4rem;
-        padding-bottom: 2rem;
+        display: grid;
+        gap: 2rem;
+    }
+
+    .prose-section {
+        background: color-mix(in srgb, var(--color-bg) 68%, transparent);
+        border: 1px solid var(--color-border);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     .prose-section h2 {
         font-family: var(--font-family-display);
-        font-size: 1.75rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0 0 1rem;
         letter-spacing: -0.02em;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
     }
 
-    .prose-section h2::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to right, var(--color-border), transparent);
+    .prose-content p,
+    .styled-list li {
+        font-family: var(--font-family-sans);
+        color: var(--color-text-muted);
+        font-size: 1rem;
+        line-height: 1.75;
     }
 
     .prose-content p {
-        font-family: var(--font-family-sans);
-        color: var(--color-text-muted);
-        font-size: 1.1rem;
-        line-height: 1.7;
-        margin-bottom: 1.5rem;
+        margin: 0 0 1rem;
+    }
+
+    .prose-content p:last-child {
+        margin-bottom: 0;
     }
 
     .styled-list {
-        font-family: var(--font-family-sans);
-        color: var(--color-text-muted);
-        font-size: 1.05rem;
-        line-height: 1.7;
-        padding-left: 0;
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .styled-list li {
-        position: relative;
-        padding-left: 1.5rem;
-    }
-
-    .styled-list li::before {
-        content: "->";
-        position: absolute;
-        left: 0;
-        color: color-mix(in srgb, var(--color-text) 30%, transparent);
-        font-family: var(--font-family-mono);
+        margin: 0;
+        padding-left: 1.25rem;
+        display: grid;
+        gap: 0.85rem;
     }
 
     .action-link {
-        font-family: var(--font-family-mono);
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
         margin-top: 1rem;
-        color: var(--color-text);
-        text-decoration: none;
-        font-size: 0.9rem;
+        font-family: var(--font-family-mono);
+        font-size: 0.85rem;
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        transition: color 0.2s ease, transform 0.2s ease;
+        color: var(--color-text);
+        text-decoration: none;
     }
 
     .action-link:hover {
-        color: var(--color-text-muted);
-        transform: translateX(4px);
+        text-decoration: underline;
+        text-underline-offset: 0.18em;
     }
-
 </style>
