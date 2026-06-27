@@ -12,13 +12,23 @@ Dewey takes your privacy very seriously. We believe your reading history, privat
 
 We do not have servers that store your books, reading sessions, notes, covers, ratings, or reading history. All library data is stored locally on your device and synced via your personal iCloud account if enabled. We do not have access to any of your content.
 
-## Analytics
+## Anonymous Usage Analytics
 
-To help us improve the app, we use [TelemetryDeck](https://telemetrydeck.com/) to collect anonymous usage data. This data helps us understand how the app is used without identifying you personally.
+Dewey can collect anonymous, aggregated usage signals to help us improve the app. This is optional and disabled until you explicitly opt in.
 
-TelemetryDeck does not collect any personally identifiable information (PII). It does not track your IP address, device ID, or any other data that could be traced back to you.
+No analytics are sent before you consent. Dewey asks for your choice during onboarding, and if you decline, nothing is sent.
 
-You can view TelemetryDeck's privacy policy [here](https://telemetrydeck.com/privacy/).
+You can change your mind at any time in **Settings -> Privacy -> Anonymous Analytics**. Turning the toggle off stops analytics immediately and rotates the anonymous installation ID so future events are no longer grouped with earlier ones from your device.
+
+Analytics events only include low-cardinality, bucketed values such as screen names or coarse session-duration ranges. No book titles, authors, notes, ratings, ISBNs, search text, or other content you enter is sent.
+
+Analytics are not linked to your identity, Apple ID, name, email, or any advertising identifier. Dewey does not track you across other apps or websites.
+
+If you opt in, Dewey generates a random, app-only installation ID on your device solely to group analytics events within Dewey. It is not derived from personal information and is rotated whenever you opt out or reset app data.
+
+TelemetryDeck is the analytics provider. You can view TelemetryDeck's privacy policy [here](https://telemetrydeck.com/privacy/).
+
+Dewey does not include crash-reporting or performance-monitoring analytics SDKs, and it does not collect crash stack traces or diagnostic reports.
 
 ## Third-Party Services
 
@@ -28,7 +38,7 @@ If iCloud sync is enabled, Apple handles syncing your library through your perso
 
 ## Data Control
 
-Dewey includes settings to export your library as CSV and to delete all app library data and app preferences from the app.
+Dewey includes settings to export your library as CSV, manage analytics consent in **Settings -> Privacy -> Anonymous Analytics**, and delete all app library data and app preferences from the app. Deleting app data also removes the anonymous analytics ID.
 
 ## Contact Us
 
