@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import DeweyScreenshotGallery from "../../components/DeweyScreenshotGallery.astro";
 
 import { Image } from "astro:assets";
 import deweyIcon from "../../assets/images/apps/dewey/icon.png";
@@ -62,6 +63,8 @@ const screenshots: DeweyScreenshot[] = Object.entries(screenshotModules)
                 </div>
             </div>
         </div>
+
+        <DeweyScreenshotGallery screenshots={screenshots} />
 
         <div class="content-section">
             <section class="description prose-section">
