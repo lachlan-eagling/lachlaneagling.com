@@ -3,6 +3,32 @@ import Layout from "../../layouts/Layout.astro";
 
 import { Image } from "astro:assets";
 import deweyIcon from "../../assets/images/apps/dewey/icon.png";
+import type { ImageMetadata } from "astro";
+
+interface DeweyScreenshot {
+    src: ImageMetadata;
+    alt: string;
+}
+
+const screenshotModules = import.meta.glob<{ default: ImageMetadata }>(
+    "../../assets/images/apps/dewey/screenshots/*",
+    { eager: true },
+);
+
+const screenshots: DeweyScreenshot[] = Object.entries(screenshotModules)
+    .sort(([leftPath], [rightPath]) => leftPath.localeCompare(rightPath))
+    .map(([path, module]) => {
+        const label = path
+            .replace(/^.*\//, "")
+            .replace(/^\d+-/, "")
+            .replace(/\.[^.]+$/, "")
+            .replace(/[-_]/g, " ");
+
+        return {
+            src: module.default,
+            alt: `Dewey ${label} screen`,
+        };
+    });
 ---
 
 <Layout>
