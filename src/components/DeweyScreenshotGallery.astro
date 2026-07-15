@@ -1,0 +1,123 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Screenshot {
+    src: ImageMetadata;
+    alt: string;
+}
+
+interface Props {
+    screenshots: Screenshot[];
+}
+
+const { screenshots } = Astro.props;
+---
+
+<section class="screenshot-gallery" aria-labelledby="dewey-gallery-title">
+    <header class="gallery-header">
+        <h2 id="dewey-gallery-title">Dewey in action</h2>
+        <p>Swipe or scroll to explore the app.</p>
+    </header>
+    <div
+        class="gallery-scroller"
+        tabindex="0"
+        aria-label="Dewey app screenshots"
+    >
+        <ul class="screenshot-list">
+            {
+                screenshots.map((screenshot, index) => (
+                    <li class="screenshot-item">
+                        <Image
+                            src={screenshot.src}
+                            alt={screenshot.alt}
+                            class="screenshot-image"
+                            widths={[480, 720, 960]}
+                            sizes="(min-width: 37.5rem) 16rem, 78vw"
+                            format="webp"
+                            quality={80}
+                            loading={index === 0 ? "eager" : "lazy"}
+                            decoding="async"
+                        />
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</section>
+
+<style>
+    .screenshot-gallery {
+        margin-bottom: 2rem;
+    }
+
+    .gallery-header {
+        margin-bottom: 1rem;
+    }
+
+    .gallery-header h2 {
+        font-family: var(--font-family-display);
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.35rem;
+    }
+
+    .gallery-header p {
+        color: var(--color-text-muted);
+        font-family: var(--font-family-sans);
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    .gallery-scroller {
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        padding: 0.25rem 0 0.85rem;
+        scroll-snap-type: x mandatory;
+        scrollbar-color: var(--color-border) transparent;
+        scrollbar-width: thin;
+    }
+
+    .gallery-scroller:focus-visible {
+        border-radius: 1rem;
+        outline: 2px solid var(--color-text);
+        outline-offset: 0.25rem;
+    }
+
+    .screenshot-list {
+        display: flex;
+        gap: 0.85rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .screenshot-item {
+        flex: 0 0 78%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
+
+    .screenshot-image {
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 1.25rem;
+        box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.12);
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+
+    @media (min-width: 37.5rem) {
+        .screenshot-item {
+            flex-basis: 16rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .gallery-scroller {
+            scroll-behavior: auto;
+        }
+    }
+</style>
