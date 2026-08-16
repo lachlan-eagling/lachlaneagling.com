@@ -1,0 +1,345 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import { Image } from "astro:assets";
+import cuppyIcon from "../../assets/images/apps/cuppy/icon.png";
+---
+
+<Layout
+    title="Cuppy"
+    description="A calm, accurate kitchen cup converter for iOS. Convert everyday ingredients into grams or ounces with regional cup standards."
+    ogImage={cuppyIcon.src}
+>
+    <div class="app-detail-container">
+        <div class="app-hero-card">
+            <div class="hero-glow"></div>
+            <div class="hero-inner">
+                <div class="app-icon-container">
+                    <Image
+                        src={cuppyIcon}
+                        alt="Cuppy App Icon"
+                        class="app-icon"
+                        width={160}
+                        height={160}
+                    />
+                </div>
+                <div class="app-title-section">
+                    <h1 class="app-title">Cuppy</h1>
+                    <span class="beta-badge">iOS · iPhone</span>
+                    <p class="app-tagline">
+                        A calm, accurate kitchen cup converter
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <section class="description prose-section">
+                <h2>About Cuppy</h2>
+                <div class="prose-content">
+                    <p>
+                        Cuppy turns a cup measure of a kitchen ingredient into
+                        a useful weight, so you can move from a recipe to the
+                        kitchen scale without doing the maths yourself.
+                    </p>
+                    <p>
+                        It keeps the experience to one quiet screen: choose a
+                        cup measure, choose an ingredient, and read the result
+                        in grams or ounces. The app is built around the
+                        Australian metric cup, with US customary and Imperial
+                        standards available when your recipe calls for them.
+                    </p>
+                </div>
+            </section>
+
+            <section class="features prose-section">
+                <h2>Features</h2>
+                <ul class="styled-list">
+                    <li>
+                        Convert ⅛, ¼, ½, and 1 cup measures into grams or
+                        ounces
+                    </li>
+                    <li>
+                        Choose from 15 everyday ingredients, including flour,
+                        sugar, butter, milk, water, honey, rice, and oats
+                    </li>
+                    <li>
+                        Switch between Australian metric, US customary, and
+                        Imperial cup standards
+                    </li>
+                    <li>
+                        Start with the measurement system your device already
+                        uses
+                    </li>
+                    <li>
+                        See kitchen-friendly whole-gram results, with precise
+                        smaller measurements where they matter
+                    </li>
+                    <li>
+                        Understand the assumptions behind each conversion,
+                        including the effect of compacting dry ingredients
+                    </li>
+                </ul>
+            </section>
+
+            <section class="details prose-section">
+                <h2>Thoughtful by design</h2>
+                <div class="prose-content">
+                    <p>
+                        Cuppy's ingredient weights are based on an Australian
+                        250 mL cup and sourced from Australian recipe
+                        references. Water is treated as 250 g per cup, while
+                        ingredients such as salt and oil use their measured
+                        bulk density where a reference chart does not list
+                        them.
+                    </p>
+                    <p>
+                        Dry weights assume an ingredient is spooned into a cup
+                        and levelled off. Scooping directly from the bag can
+                        compact it and add 15–20%, so Cuppy keeps that useful
+                        qualification close to the result.
+                    </p>
+                </div>
+            </section>
+
+            <section class="privacy prose-section">
+                <h2>Privacy Policy</h2>
+                <div class="prose-content">
+                    <p>
+                        Cuppy collects no data. There are no analytics,
+                        observability tools, crash reporting, telemetry,
+                        accounts, third-party tracking, or CloudKit services.
+                        Cuppy does not send anything to a server.
+                    </p>
+                    <a href="/apps/cuppy/privacy" class="action-link"
+                        >Read full Privacy Policy →</a
+                    >
+                </div>
+            </section>
+
+            <section class="contact prose-section">
+                <h2>Contact</h2>
+                <div class="prose-content">
+                    <p>
+                        For support, feedback, or any other inquiries related
+                        to Cuppy, please reach out via email.
+                    </p>
+                    <a
+                        href="mailto:hello@lachlaneagling.com"
+                        class="action-link">hello@lachlaneagling.com →</a
+                    >
+                </div>
+            </section>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .app-detail-container {
+        max-width: 700px;
+        margin: 0 auto;
+        animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .app-hero-card {
+        position: relative;
+        margin-top: 1rem;
+        margin-bottom: 4rem;
+        border-radius: 24px;
+    }
+
+    .hero-glow {
+        position: absolute;
+        inset: -20px;
+        z-index: 0;
+        border-radius: 24px;
+        background: radial-gradient(
+            circle at 50% 50%,
+            color-mix(in srgb, var(--color-text) 10%, transparent),
+            transparent 70%
+        );
+        opacity: 0.5;
+        filter: blur(20px);
+    }
+
+    .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        padding: 3rem;
+        border: 1px solid var(--color-border);
+        border-radius: 24px;
+        background: color-mix(in srgb, var(--color-bg) 70%, transparent);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    @media (min-width: 600px) {
+        .hero-inner {
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 3rem;
+            padding: 4rem 3rem;
+        }
+    }
+
+    .app-icon-container {
+        width: 140px;
+        height: 140px;
+        flex-shrink: 0;
+    }
+
+    .app-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 32px;
+        object-fit: cover;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border: 1px solid
+            color-mix(in srgb, var(--color-border) 50%, transparent);
+    }
+
+    .app-title-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    @media (min-width: 600px) {
+        .app-title-section {
+            align-items: flex-start;
+            text-align: left;
+        }
+    }
+
+    .app-title {
+        margin: 0;
+        font-family: var(--font-family-display);
+        font-size: clamp(3rem, 6vw, 4rem);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        background: linear-gradient(
+            135deg,
+            var(--color-text) 0%,
+            var(--color-text-muted) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .beta-badge {
+        margin-top: 0.75rem;
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        color: var(--color-text-muted);
+        background: color-mix(in srgb, var(--color-border) 80%, transparent);
+        font-family: var(--font-family-mono);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .app-tagline {
+        max-width: 400px;
+        margin: 1.5rem 0 0;
+        color: var(--color-text-muted);
+        font-family: var(--font-family-sans);
+        font-size: 1.15rem;
+        line-height: 1.5;
+    }
+
+    .content-section {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        padding-bottom: 2rem;
+    }
+
+    .prose-section h2 {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        font-family: var(--font-family-display);
+        font-size: 1.75rem;
+        letter-spacing: -0.02em;
+    }
+
+    .prose-section h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, var(--color-border), transparent);
+    }
+
+    .prose-content p {
+        margin-bottom: 1.5rem;
+        color: var(--color-text-muted);
+        font-family: var(--font-family-sans);
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    .styled-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin: 0;
+        padding-left: 0;
+        color: var(--color-text-muted);
+        font-family: var(--font-family-sans);
+        font-size: 1.05rem;
+        line-height: 1.7;
+        list-style: none;
+    }
+
+    .styled-list li {
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .styled-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: color-mix(in srgb, var(--color-text) 30%, transparent);
+        font-family: var(--font-family-mono);
+    }
+
+    .action-link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: var(--color-text);
+        font-family: var(--font-family-mono);
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .action-link:hover {
+        color: var(--color-text-muted);
+        transform: translateX(4px);
+    }
+</style>

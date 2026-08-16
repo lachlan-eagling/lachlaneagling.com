@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import runeIcon from "../assets/images/apps/rune/icon.png";
 import deweyIcon from "../assets/images/apps/dewey/icon.png";
+import cuppyIcon from "../assets/images/apps/cuppy/icon.png";
 ---
 
 <Layout>
@@ -16,6 +17,37 @@ import deweyIcon from "../assets/images/apps/dewey/icon.png";
     </div>
 
     <div class="apps-grid">
+        <!-- Cuppy App Card -->
+        <a href="/apps/cuppy" class="app-card">
+            <div class="card-glow"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-icon-wrapper">
+                        <Image
+                            src={cuppyIcon}
+                            alt="Cuppy App Icon"
+                            class="card-icon-img"
+                            width={64}
+                            height={64}
+                        />
+                    </div>
+                    <div class="card-title-group">
+                        <h2>Cuppy</h2>
+                        <span class="badge">iOS</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>
+                        A calm, accurate kitchen cup converter for turning
+                        everyday ingredients into grams or ounces.
+                    </p>
+                    <span class="card-link"
+                        >Explore Cuppy <span class="arrow">→</span>
+                    </span>
+                </div>
+            </div>
+        </a>
+
         <!-- Rune App Card -->
         <a href="/apps/rune" class="app-card">
             <div class="card-glow"></div>
